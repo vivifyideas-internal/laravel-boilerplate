@@ -22,7 +22,7 @@ function deploy() {
 }
 
 if [ ${BRANCH} = "master" ]; then
-	deploy "https://{DEPLOY_URL}" '[DEPLOY_SERIVCES]'
+	deploy "https://milosm-deploy.vivifyideas.com" 'milosm'
 else
 	echo "Branch ${BRANCH} is not deployable"
 fi
