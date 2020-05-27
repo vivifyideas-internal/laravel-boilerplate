@@ -21,8 +21,8 @@ function deploy() {
 	echo "Deploy finished"
 }
 
-if [ ${BRANCH} = "{BRANCH}" ]; then
-	deploy "https://{DEPLOY_URL}" '[DEPLOY_SERIVCES]'
+if [ ${BRANCH} = "master" ]; then
+	deploy "https://milosm-deploy.vivifyideas.com" 'milosm'
 else
 	echo "Branch ${BRANCH} is not deployable"
 fi

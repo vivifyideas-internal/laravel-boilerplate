@@ -1,9 +1,9 @@
 kind: pipeline
-name: {PROJECT_NAME}
+name: vivifyideas-internal/laravel-boilerplate
 
 trigger:
   branch:
-    - {BRANCH}
+    - master
   event:
     - push
 
@@ -30,8 +30,8 @@ steps:
         path: /var/run/docker.sock
     commands:
       - docker login -u $REGISTRY_USER -p $REGISTRY_PASS registry.vivifyideas.com
-      - docker build -t registry.vivifyideas.com/{NAMESPACE}/laravel:${DRONE_BRANCH} --pull=true .
-      - docker push registry.vivifyideas.com/{NAMESPACE}/laravel:${DRONE_BRANCH}
+      - docker build -t registry.vivifyideas.com/devops-test/laravel:${DRONE_BRANCH} --pull=true .
+      - docker push registry.vivifyideas.com/devops-test/laravel:${DRONE_BRANCH}
       - docker image prune -f
 
   - name: build web
@@ -48,14 +48,14 @@ steps:
         path: /var/run/docker.sock
     commands:
       - docker login -u $REGISTRY_USER -p $REGISTRY_PASS registry.vivifyideas.com
-      - docker build -f Dockerfile-web -t registry.vivifyideas.com/{NAMESPACE}/web:${DRONE_BRANCH} --pull=true .
-      - docker push registry.vivifyideas.com/{NAMESPACE}/web:${DRONE_BRANCH}
+      - docker build -f Dockerfile-web -t registry.vivifyideas.com/devops-test/web:${DRONE_BRANCH} --pull=true .
+      - docker push registry.vivifyideas.com/devops-test/web:${DRONE_BRANCH}
       - docker image prune -f
 
   - name: deploy
     image: alpine
     environment:
-      BRANCH: ${DRONE_BRANCH}
+      BRANCH: master
     commands:
       - apk add --no-cache curl
       - sh deploy.sh
@@ -67,5 +67,5 @@ steps:
     settings:
       webhook:
         from_secret: slack_webhook
-      channel: {SLACK_CHANNEL}
+      channel: milosm-slack-hooks
 
