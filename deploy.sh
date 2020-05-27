@@ -21,7 +21,7 @@ function deploy() {
 	echo "Deploy finished"
 }
 
-if [ ${BRANCH} = "{BRANCH}" ]; then
+if [ ${BRANCH} = "master" ]; then
 	deploy "https://{DEPLOY_URL}" '[DEPLOY_SERIVCES]'
 else
 	echo "Branch ${BRANCH} is not deployable"
