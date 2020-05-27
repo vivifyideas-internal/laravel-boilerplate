@@ -23,7 +23,7 @@ function deploy() {
 }
 
 if [ ${BRANCH} = "master" ]; then
-	deploy "https://milosm-deploy.vivifyideas.com" 'milosm'
+	deploy "https://milosm-deploy.vivifyideas.com" 'laravel'
 else
 	echo "Branch ${BRANCH} is not deployable"
 fi
